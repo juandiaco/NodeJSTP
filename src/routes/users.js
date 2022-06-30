@@ -71,7 +71,7 @@ router.put('/editarUser/', async(req,res) =>{
 
 router.delete('/eliminarUser/'), async(req, res) =>{
     const{id} = req.body;
-    
+    UserController.eliminarUser(req, res, id);
 }
 
 router.get('/test', function(req, res, next) {

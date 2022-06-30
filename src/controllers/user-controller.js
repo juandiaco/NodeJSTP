@@ -27,12 +27,14 @@ exports.editarUser = async function (req, res, userTemporal){
 
     console.log(userTemporal);
     const userEncontrado = await User.findById(userTemporal.id).lean();
+    var userEncontrado2 = await User.find({email: userTemporal.email});
 
-    console.log(userEncontrado);
-
+    console.log(userEncontrado2);
+    idUserViejo = userEncontrado2.id;
+    console.log(idUserViejo);
     try {
         // Calling the Service function with the new object from the Request Body
-        var editedUser = await userService.editeUser(userTemporal);
+        var editedUser = await userService.editeUser(userEncontrado2,userTemporal);
         return res.status(201).json({editedUser, message: "Usuario editado"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.

@@ -29,11 +29,13 @@ exports.createUser = async function(user){
 
 }
 
-exports.editeUser = async function(usuarioEditado){
+exports.editeUser = async function(usuarioViejo, usuarioEditado){
     console.log("Llegaste al user-service papa");
-    const{id, name, password, email} = usuarioEditado;
-    console.log(newUser);
-    User.findByIdAndUpdate(newUser.id,{name, password, email});
+    const{name, password, email} = usuarioEditado;
+    console.log(usuarioEditado);
+    console.log(usuarioViejo);
+    console.log("EL ID ES", usuarioViejo._id);
+    User.findByIdAndUpdate(usuarioEditado.id,{name, password, email});
     console.log("Se creó el usuario re piola");
 }
 
