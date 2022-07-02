@@ -29,17 +29,16 @@ exports.createUser = async function(user){
 
 }
 
-exports.editeUser = async function(usuarioViejo, usuarioEditado){
+exports.editeUser = async function(usuarioEditado){
     console.log("Llegaste al user-service papa");
     const{name, password, email} = usuarioEditado;
     console.log(usuarioEditado);
-    console.log(usuarioViejo);
-    console.log("EL ID ES", usuarioViejo._id);
-    User.findByIdAndUpdate(usuarioEditado.id,{name, password, email});
+    console.log({name, password, email});
+    await User.findByIdAndUpdate(usuarioEditado._id,{name, password, email});
     console.log("Se creó el usuario re piola");
 }
 
 exports.deleteUser = async function(key){
-    User.findByIdAndDelete(key);
+    await User.findByIdAndDelete(key);
     console.log("Usuario eliminado");
 }

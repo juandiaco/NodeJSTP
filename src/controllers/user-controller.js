@@ -25,23 +25,20 @@ exports.createUsers = async function(req, res, userNuevo){
 exports.editarUser = async function (req, res, userTemporal){
     console.log("Llegaste al controller papa");
 
-    console.log(userTemporal);
-    const userEncontrado = await User.findById(userTemporal.id).lean();
-    var userEncontrado2 = await User.find({email: userTemporal.email});
-
-    console.log(userEncontrado2);
-    idUserViejo = userEncontrado2.id;
-    console.log(idUserViejo);
+    console.log(userTemporal.name);
+    const userEncontrado2 = await User.find({email: userTemporal.email});
+    
     try {
         // Calling the Service function with the new object from the Request Body
-        var editedUser = await userService.editeUser(userEncontrado2,userTemporal);
+        var editedUser = await userService.editeUser(userTemporal);
         return res.status(201).json({editedUser, message: "Usuario editado"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
         return res.status(400).json({status: 400, message: "El usuario no pudo ser editado"})
     };
-    
+
+
 }
 
 exports.eliminarUser = async function (req, res, key){
@@ -50,8 +47,8 @@ exports.eliminarUser = async function (req, res, key){
 
     try {
         // Calling the Service function with the new object from the Request Body
-        await userService.deleteUser(key);
-        return res.status(201).json({editedUser, message: "Usuario eliminado"})
+        var usuarioEliminado = await userService.deleteUser(key);
+        return res.status(201).json({usuarioEliminado, message: "Usuario eliminado"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)

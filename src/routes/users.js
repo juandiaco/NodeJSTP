@@ -62,17 +62,20 @@ router.post('/registrar/', async(req,res) =>{
     UserController.createUsers(req, res, newUser);
 } );
 
-router.put('/editarUser/', async(req,res) =>{
-    const{id, name, email, password}=req.body;
-    const newUserEdicion = new User({id, name, email, password});
+router.put('/editarUser/', async function(req,res) {
+    const{_id, name, email, password}=req.body;
+    const newUserEdicion = new User({_id, name, email, password});
     console.log(newUserEdicion);
     UserController.editarUser(req, res, newUserEdicion);
 })
 
-router.delete('/eliminarUser/'), async(req, res) =>{
-    const{id} = req.body;
-    UserController.eliminarUser(req, res, id);
-}
+router.delete('/eliminarUser/', async function (req, res){
+    const{_id} = req.body;
+    console.log("EL ID ES", _id);
+    UserController.eliminarUser(req, res, _id);
+})
+
+
 
 router.get('/test', function(req, res, next) {
     res.send('Llegaste a la ruta de  api/user');
