@@ -1,6 +1,16 @@
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const JWT_SECRET = `${process.env.JWT_SECRET}`;
+
+const Authorization = require("../auth/authorization");
+
 const userService = require("../services/user-service");
 
 const User = require("../models/User");
+
+const jwt = require("jsonwebtoken");
 
 exports.createUsers = async function(req, res, userNuevo){
     console.log("Controller papa");
@@ -55,4 +65,17 @@ exports.eliminarUser = async function (req, res, key){
         return res.status(400).json({status: 400, message: "El usuario no pudo ser eliminado"})
     };
 
+}
+
+exports.GenerarToken = async function (req, res){
+
+    
+
+    var tiempo = Date()
+    const token = jwt.sign({tiempo}, JWT_SECRET, {expiresIn: 86400})
+    res.send(token);
+}
+
+exports.TestToken= async function(req, res){
+    res.send("TODO PIOLA");
 }

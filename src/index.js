@@ -3,6 +3,9 @@ const app = express();
 // Se importa el modulo path para unir directorios en la aplicación
 const path = require('path');
 
+// Se cargan las variables de entorno
+require("dotenv").config();
+
 // Se importa handlebars
 const exphbs = require('express-handlebars');
 
