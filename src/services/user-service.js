@@ -2,6 +2,11 @@ const User = require('../models/User');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const JWT_SECRET = `${process.env.JWT_SECRET}`;
 
 exports.createUser = async function(user){
     var newUser = new User ({
@@ -26,8 +31,17 @@ exports.createUser = async function(user){
         console.log("El usuario ya existe");
     }
     else{
-        console.log("CREANDO USUARIO");
-        await newUser.save();
+        try {
+            console.log("CREANDO USUARIO");
+            var usuarioGuardado = await newUser.save();
+            var token = jwt.sign({id: usuarioGuardado._id}, JWT_SECRET , {expiresIn: 86400});
+            return {token:token, user:usuarioGuardado}
+        }
+        catch(e) {
+            // return a Error message describing the reason 
+            console.log(e)    
+            throw Error("Error while Creating User")
+        }
     }
 
 }
@@ -44,4 +58,20 @@ exports.editeUser = async function(usuarioEditado){
 exports.deleteUser = async function(key){
     await User.findByIdAndDelete(key);
     console.log("Usuario eliminado");
+}
+
+exports.loginUser = async function(user){
+    try{
+    usuarioEncontrado = await User.findOne({email: user.email});
+    var contraseñaValida = bcrypt.compareSync(user.password, usuarioEncontrado.password);
+    if(!contraseñaValida){
+        throw Error("Invalid username/password")
+    }
+    var token = jwt.sign({id: usuarioEncontrado._id}, JWT_SECRET , {expiresIn: 86400});
+    return {user: usuarioEncontrado, token:token};
+    }
+    catch (e) {
+        // return a Error message describing the reason     
+        throw Error("Error while Login User")
+    }
 }

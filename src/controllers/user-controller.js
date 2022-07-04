@@ -22,8 +22,8 @@ exports.createUsers = async function(req, res, userNuevo){
     console.log(userNuevo.name);
     try {
         // Calling the Service function with the new object from the Request Body
-        var createdUser = await userService.createUser(User)
-        return res.status(201).json({createdUser, message: "Succesfully Created User"})
+        var salidaCreacion = await userService.createUser(User)
+        return res.status(201).json({salidaCreacion, message: "Succesfully Created User"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
@@ -68,9 +68,7 @@ exports.eliminarUser = async function (req, res, key){
 }
 
 exports.GenerarToken = async function (req, res){
-
     
-
     var tiempo = Date()
     const token = jwt.sign({tiempo}, JWT_SECRET, {expiresIn: 86400})
     res.send(token);
@@ -78,4 +76,19 @@ exports.GenerarToken = async function (req, res){
 
 exports.TestToken= async function(req, res){
     res.send("TODO PIOLA");
+}
+
+exports.Login = async function(req, res){
+    var usuarioEntrante = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    try {
+        // Calling the Service function with the new object from the Request Body
+        var loginUser = await userService.loginUser(usuarioEntrante);
+        return res.status(201).json({loginUser, message: "Succesfully login"})
+    } catch (e) {
+        //Return an Error Response Message with Code and the Error Message.
+        return res.status(400).json({status: 400, message: "Invalid username or password"})
+    }
 }

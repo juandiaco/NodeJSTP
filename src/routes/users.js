@@ -45,4 +45,9 @@ router.get('/test/token',Authorization, async function(req, res){
     UserController.TestToken(req,res);
 })
 
+router.post('/login/', async function(req, res){
+    UserController.Login(req,res);
+})
+
 module.exports = router;
+
