@@ -74,8 +74,14 @@ app.use((req, rest, next) => {
     next();
 });
 
+app.use((req,rest,next) =>{
+    rest.locals.receta = req.receta || null;
+    next();
+})
+
 // Routes
 app.use(require('./routes/users'));
+app.use(require('./routes/recetas'))
 
 
 

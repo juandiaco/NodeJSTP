@@ -1,9 +1,4 @@
-const dotenv = require('dotenv');
-
-dotenv.config();
-
 const recetaService = require("../services/receta-service.js");
-
 const Receta = require("../models/Receta");
 
 exports.crearReceta = async function(req, res, nuevaReceta){
@@ -11,12 +6,18 @@ exports.crearReceta = async function(req, res, nuevaReceta){
     var Receta = {
         titulo: nuevaReceta.titulo,
         descripcion:nuevaReceta.descripcion,
+        categoria: nuevaReceta.categoria,
+        ingredientes: nuevaReceta.ingredientes,
+        duracion: nuevaReceta.duracion,
+        updated: nuevaReceta.updated,
+        dificultad: nuevaReceta.dificultad,
+        procedimiento: nuevaReceta.procedimiento,
     };
     console.log(nuevaReceta.name);
     try {
         // Calling the Service function with the new object from the Request Body
         var salidaCreacion = await recetaService.crearReceta(Receta)
-        return res.status(201).json({salidaCreacion, message: "Receta creada con exito"})
+        return res.status(201).json({salidaCreacion, message: "La receta fue creada exitosamente"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
