@@ -1,5 +1,6 @@
 const Receta = require('../models/Receta');
 
+//Crea la Receta
 exports.crearReceta = async function(receta){
     var nuevaReceta = new Receta ({
         titulo: receta.titulo,
@@ -32,5 +33,22 @@ exports.crearReceta = async function(receta){
         console.log(e)    
         throw Error("Error")
     }
+}
+
+//Edita la Receta
+exports.editeReceta = async function (recetaEditada){
+    console.log ("Hola soy el Receta-Service");
+    const{titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento} = recetaEditada;
+    console.log(recetaEditada);
+    console.log({titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
+    await Receta.findByIdAndUpdate(recetaEditada._id,{titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
+    console.log("Receta editada exitosamente")
+}
+
+//Eliminar Receta
+
+exports.deleteReceta = async function(key){
+    await Receta.findByIdAndDelete(key);
+    console.log("Se elimino la receta");
 }
 
