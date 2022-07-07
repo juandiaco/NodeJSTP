@@ -31,16 +31,16 @@ exports.crearReceta = async function(req, res, nuevaReceta){
 exports.editarReceta = async function (req, res, recetaTemporal){
     console.log("Welcome to receta controller");
     console.log(recetaTemporal.titulo);
-    const recetaEncontrada = await Receta.find({titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
+    const recetaEncontrada = await Receta.find({titulo: recetaTemporal.titulo});
 
     try {
         // Calling the Service function with the new object from the Request Body
         var editedReceta = await recetaService.editeReceta(recetaTemporal);
-        return res.status(201).json({editedReceta, message: "Receta editado"})
+        return res.status(201).json({editedReceta, message: "La Receta se edito"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "Error"})
+        return res.status(400).json({status: 400, message: "Error editando la receta"})
     };
 }
 
