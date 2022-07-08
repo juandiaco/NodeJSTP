@@ -46,6 +46,7 @@ router.get('/test/token',Authorization, async function(req, res){
 })
 
 router.post('/login/', async function(req, res){
+    console.log("PASASTE POR ACA");
     UserController.Login(req,res);
 })
 

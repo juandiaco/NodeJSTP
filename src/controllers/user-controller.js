@@ -83,9 +83,11 @@ exports.Login = async function(req, res){
         email: req.body.email,
         password: req.body.password
     }
+    console.log(usuarioEntrante);
     try {
         // Calling the Service function with the new object from the Request Body
         var loginUser = await userService.loginUser(usuarioEntrante);
+        console.log("USUARIO LOGEADO PAPA");
         return res.status(201).json({loginUser, message: "Succesfully login"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
