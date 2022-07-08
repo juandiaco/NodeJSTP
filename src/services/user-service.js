@@ -12,7 +12,8 @@ exports.createUser = async function(user){
     var newUser = new User ({
         name: user.name,
         email: user.email,
-        password: user.password
+        password: user.password,
+        date: user.date
     });
     console.log("AAAAAAAAAAAA")
     console.log(newUser.name);
@@ -68,7 +69,7 @@ exports.loginUser = async function(user){
         throw Error("Invalid username/password")
     }
     var token = jwt.sign({id: usuarioEncontrado._id}, JWT_SECRET , {expiresIn: 86400});
-    return {user: usuarioEncontrado, token:token};
+    return {user: usuarioEncontrado, token:token,};
     }
     catch (e) {
         // return a Error message describing the reason     

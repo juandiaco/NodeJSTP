@@ -18,6 +18,7 @@ exports.createUsers = async function(req, res, userNuevo){
         name: userNuevo.name,
         email: userNuevo.email,
         password: userNuevo.password,
+        date: userNuevo.date,
     };
     console.log(userNuevo.name);
     try {

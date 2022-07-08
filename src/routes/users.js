@@ -11,8 +11,8 @@ const router = express.Router();
 const Authorization = require("../auth/authorization");
 
 router.post('/registrar/', async(req,res) =>{
-    const {name, email, password} = req.body;
-    const newUser = new User({name, email, password});
+    const {name, email, password, date} = req.body;
+    const newUser = new User({name, email, password, date});
     console.log(newUser);
     console.log("Palabra secreta", process.env.SECRET);
 
