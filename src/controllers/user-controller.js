@@ -19,8 +19,9 @@ exports.createUsers = async function(req, res, userNuevo){
         email: userNuevo.email,
         password: userNuevo.password,
         date: userNuevo.date,
+        perfil: userNuevo.perfil,
     };
-    console.log(userNuevo.name);
+    console.log(userNuevo.perfil);
     try {
         // Calling the Service function with the new object from the Request Body
         var salidaCreacion = await userService.createUser(User)

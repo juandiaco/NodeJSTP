@@ -11,10 +11,10 @@ const router = express.Router();
 const Authorization = require("../auth/authorization");
 
 router.post('/registrar/', async(req,res) =>{
-    const {name, email, password, date} = req.body;
-    const newUser = new User({name, email, password, date});
+    const {name, email, password, date, perfil} = req.body;
+    const newUser = new User({name, email, password, date, perfil});
     console.log(newUser);
-    console.log("Palabra secreta", process.env.SECRET);
+    
 
     // Se encripta la contraseña
     newUser.password = await newUser.encryptPassword(password);

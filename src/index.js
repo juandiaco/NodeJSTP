@@ -9,6 +9,12 @@ require("dotenv").config();
 // Se importa handlebars
 const exphbs = require('express-handlebars');
 
+const cors = require('cors');
+
+app.use(cors({
+    origin: '*'
+}));
+
 
 // Method Override sirve para poder enviar otros tipos de metodos ademas de GET y POST
     
@@ -90,15 +96,20 @@ app.use(require('./routes/recetas'))
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// PRUEBA SARASA
 app.use(function (req, res, next){
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Methods");
+    res.header("Access-Control-Allow-Origin", '*');
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Allow", 'GET, POST, PUT, DELETE');
     next();
 });
 
+app.use(express.json());
 
+app.use(express.urlencoded({
+    extended: false
+  }));
 
 
 

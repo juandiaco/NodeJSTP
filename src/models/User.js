@@ -6,7 +6,8 @@ const userSchema = new Schema({
     name:{type: String, require: true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    date: {type: Date, default: Date.now}
+    date: {type: Date, default: Date.now},
+    perfil:{type: String}
 })
 
 // Metodo para encriptar la contraseña y devolverla encriptada

@@ -1,7 +1,7 @@
 const User = require('../models/User');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-
+const {cloudinary} = require ('../cloudinary/cloudinary');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -13,7 +13,8 @@ exports.createUser = async function(user){
         name: user.name,
         email: user.email,
         password: user.password,
-        date: user.date
+        date: user.date,
+        perfil: user.perfil
     });
     console.log("AAAAAAAAAAAA")
     console.log(newUser.name);
@@ -33,6 +34,12 @@ exports.createUser = async function(user){
     }
     else{
         try {
+            
+            console.log("GUARDANDO IMAGEN");
+            const uploadedResponse = await cloudinary.uploader.upload(newUser.perfil, {upload_preset: 'TP'});
+            
+            console.log(uploadedResponse);
+
             console.log("CREANDO USUARIO");
             var usuarioGuardado = await newUser.save();
             var token = jwt.sign({id: usuarioGuardado._id}, JWT_SECRET , {expiresIn: 86400});
