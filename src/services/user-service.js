@@ -39,7 +39,10 @@ exports.createUser = async function(user){
             const uploadedResponse = await cloudinary.uploader.upload(newUser.perfil, {upload_preset: 'TP'});
             
             console.log(uploadedResponse);
+            const jsonRespuesta = await uploadedResponse.public_id;
+            console.log("JSON RESPUESTA",jsonRespuesta);
 
+            newUser.perfil = uploadedResponse.public_id;
             console.log("CREANDO USUARIO");
             var usuarioGuardado = await newUser.save();
             var token = jwt.sign({id: usuarioGuardado._id}, JWT_SECRET , {expiresIn: 86400});
