@@ -14,6 +14,7 @@ exports.crearReceta = async function(req, res, nuevaReceta){
         updated: nuevaReceta.updated,
         dificultad: nuevaReceta.dificultad,
         procedimiento: nuevaReceta.procedimiento,
+        calificacion:nuevaReceta.calificacion
     };
     console.log(nuevaReceta.name);
     try {
