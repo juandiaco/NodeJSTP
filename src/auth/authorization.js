@@ -16,11 +16,13 @@ var authorization = function (req, res, next) {
 
     let sec = JWT_SECRET;
     //console.log("secret",sec)
+    
     jwt.verify(token, sec, function (err, decoded) {
         var msg = {auth: false, message: 'Failed to authenticate token.'};
         if (err)
         res.status(500).send(msg);
-        req.userId = decoded.id;
+        console.log("DECODED", decoded);
+        //req.userId = decoded.id;
         next();
     });
 }

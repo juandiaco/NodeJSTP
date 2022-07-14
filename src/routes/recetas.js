@@ -1,21 +1,21 @@
 const express = require("express");
 const recetaController = require("../controllers/receta-controller");
 const router = express.Router();
-
+const Authorization = require("../auth/authorization");
 // Importo el schema de la Receta
 const Receta = require('../models/Receta');
 
 //Crear una nueva Receta
 router.post('/crearReceta/', async(req,res) =>{
-    const {titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento} = req.body;
-    const nuevaReceta= new Receta({titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
-    console.log(nuevaReceta);
+    const {titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador} = req.body;
+    const nuevaReceta= new Receta({titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador});
+    console.log("Receta ruta",nuevaReceta);
 
     recetaController.crearReceta(req, res, nuevaReceta);
 } );
 
 //Editar una Receta
-router.put('/editarReceta/', async function (req,res){
+router.put('/editarReceta/',Authorization, async function (req,res){
     const {_id, titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento} = req.body;
     const nuevaRecetaEditada = new Receta ({_id, titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
     console.log(nuevaRecetaEditada);
@@ -23,12 +23,17 @@ router.put('/editarReceta/', async function (req,res){
 })
 
 //Eliminar una Receta
-router.delete('/eliminarReceta', async function (req,res){
+router.delete('/eliminarReceta',Authorization, async function (req,res){
     const{_id}=req.body;
     console.log("id:",_id);
     recetaController.eliminarReceta(req,res,_id);
 })
 
+router.get('/recetasDeUser', Authorization, async function (req,res){
+    const{creador} = req.headers;
+    console.log("id:",creador);
+    recetaController.recetasDeUser(req,res,creador);
+})
 
 module.exports = router;
 

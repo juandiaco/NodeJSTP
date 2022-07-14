@@ -38,6 +38,10 @@ router.delete('/eliminarUser/',Authorization, async function (req, res){
 
 router.get('/test', async function(req, res) {
     UserController.GenerarToken(req,res);
+    const creador = req.headers.creador;
+    
+    console.log(creador);
+    return res.status(201).json({creador, message:"CREADOR"})
   });
 
 

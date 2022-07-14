@@ -7,16 +7,15 @@ exports.crearReceta = async function(req, res, nuevaReceta){
     console.log("welcome to crear receta");
     var Receta = {
         titulo: nuevaReceta.titulo,
-        descripcion:nuevaReceta.descripcion,
         categoria: nuevaReceta.categoria,
         ingredientes: nuevaReceta.ingredientes,
         duracion: nuevaReceta.duracion,
-        updated: nuevaReceta.updated,
         dificultad: nuevaReceta.dificultad,
         procedimiento: nuevaReceta.procedimiento,
-        calificacion:nuevaReceta.calificacion
+        borrador: nuevaReceta.borrador,
+        creador: nuevaReceta.creador,
     };
-    console.log(nuevaReceta.name);
+    console.log("Receta Controller",nuevaReceta);
     try {
         // Calling the Service function with the new object from the Request Body
         var salidaCreacion = await recetaService.crearReceta(Receta)
@@ -59,4 +58,17 @@ exports.eliminarReceta = async function (req,res,key){
         console.log(e)
         return res.status(400).json({status: 400, message: "El usuario no pudo ser eliminado"})
     };
+}
+
+
+exports.recetasDeUser = async function (req, res, creador){
+    console.log("Controller Creador", creador);
+    try{
+        let recetasEncontradas = await recetaService.traerRecetasUser(creador);
+        return res.status(201).json({recetasEncontradas, message:"Recetas encontradas"})
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).json({status: 400, message: "No se pudo traer recetas"});
+    }
 }
