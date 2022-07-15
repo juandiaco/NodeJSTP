@@ -89,3 +89,17 @@ exports.traerRecetas = async function (req,res){
         return res.status(400).json({status: 400, message: "No se pudo traer recetas"});
     }
 }
+
+
+exports.filtrarReceta = async function (req,res,filtro){
+    console.log("FILTRO CONTROLLER");
+    try{
+        let recetasEncontradas = await recetaService.filtroRecetas(filtro);
+        console.log("RECETA EN CONTROLLER",recetasEncontradas[0]);
+        return res.status(201).json({recetasEncontradas, message:"Recetas encontradas"})
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).json({status: 400, message: "No se pudo traer recetas"});
+    }
+}

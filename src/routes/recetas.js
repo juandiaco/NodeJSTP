@@ -40,6 +40,13 @@ router.get('/traerRecetas', async function(req,res){
     recetaController.traerRecetas(req,res);
 })
 
+router.post("/filtrarRecetas", async function(req,res){
+    console.log("VINO POR ACA");
+    const {ingredientes,dificultad,categoria} = req.body;
+    const filtros = {ingredientes,dificultad,categoria};
+    console.log(filtros)
+    recetaController.filtrarReceta(req,res,filtros);
+})
 
 module.exports = router;
 
