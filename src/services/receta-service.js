@@ -64,6 +64,12 @@ exports.traerRecetasUser = async function(creador){
     return recetas;
 }
 
+exports.traerRecetaCompleta = async function (){
+    console.log("Traer receta completa service");
+    const receta = await Receta.find ({borrador: false})
+    return receta;
+}
+
 exports.traerRecetas = async function(){
     console.log("TRAER RECETAS SERVICE");
     const recetas = await Receta.find({borrador: false}).sort({updated: 'desc'}).limit(15);
