@@ -43,16 +43,12 @@ router.get('/traerRecetas', async function(req,res){
 router.post("/filtrarRecetas", async function(req,res){
     console.log("VINO POR ACA");
     const {ingredientes,dificultad,categoria} = req.body;
-    const filtros = {ingredientes,dificultad,categoria};
+    const filtros = {ingredientes,dificultad,categoria};    
     console.log(filtros)
     recetaController.filtrarReceta(req,res,filtros);
 })
 
-router.delete("/deleteReceta", async function(req,res){
-    const {_id} = req.body;
-    console.log("id:", _id);
-    recetaController.eliminarReceta(req, res, _id);
-})
+
 
 
 module.exports = router;
