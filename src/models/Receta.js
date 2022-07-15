@@ -17,7 +17,7 @@ const recetaSchema = new Schema({
     creador: {type: String, required: true},
     puntaje: {type: Number, default: 0},
     borrador:{type: Boolean, required: true},
-    imagenReceta:{type:String},
+    imagenReceta:{type:String}
 
 })
 

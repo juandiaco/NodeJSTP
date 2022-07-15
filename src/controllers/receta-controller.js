@@ -75,3 +75,16 @@ exports.recetasDeUser = async function (req, res, creador){
         return res.status(400).json({status: 400, message: "No se pudo traer recetas"});
     }
 }
+
+exports.traerRecetas = async function (req,res){
+    console.log("CONTROLLER TRAER RECETAS");
+    try{
+        let recetasEncontradas = await recetaService.traerRecetas();
+        console.log("RECETA EN CONTROLLER",recetasEncontradas[0]);
+        return res.status(201).json({recetasEncontradas, message:"Recetas encontradas"})
+    }
+    catch(e){
+        console.log(e)
+        return res.status(400).json({status: 400, message: "No se pudo traer recetas"});
+    }
+}

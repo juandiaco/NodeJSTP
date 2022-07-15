@@ -7,8 +7,9 @@ const Receta = require('../models/Receta');
 
 //Crear una nueva Receta
 router.post('/crearReceta/', async(req,res) =>{
-    const {titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador} = req.body;
-    const nuevaReceta= new Receta({titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador});
+    const {titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador, imagenReceta} = req.body;
+    const nuevaReceta= new Receta({titulo, categoria, ingredientes, duracion, dificultad, procedimiento, borrador, creador, imagenReceta});
+   
     console.log("Receta ruta",nuevaReceta);
 
     recetaController.crearReceta(req, res, nuevaReceta);
@@ -34,6 +35,11 @@ router.get('/recetasDeUser', Authorization, async function (req,res){
     console.log("id:",creador);
     recetaController.recetasDeUser(req,res,creador);
 })
+
+router.get('/traerRecetas', async function(req,res){
+    recetaController.traerRecetas(req,res);
+})
+
 
 module.exports = router;
 
