@@ -56,7 +56,7 @@ exports.eliminarReceta = async function (req,res,key){
     try {
         // Calling the Service function with the new object from the Request Body
         var recetaEliminada = await recetaService.deleteReceta(key);
-        return res.status(201).json({recetaEliminada, message: "Se elimino la receta"})
+        return res.status(201).json({status: 201, message: "Se elimino la receta"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)

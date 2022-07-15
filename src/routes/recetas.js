@@ -24,11 +24,11 @@ router.put('/editarReceta/',Authorization, async function (req,res){
 })
 
 //Eliminar una Receta
-router.delete('/eliminarReceta',Authorization, async function (req,res){
-    const{_id}=req.body;
-    console.log("id:",_id);
-    recetaController.eliminarReceta(req,res,_id);
-})
+router.delete('/eliminarReceta/',Authorization, async function (req, res){
+        const { _id } = req.body;
+        console.log("id:", _id);
+        recetaController.eliminarReceta(req, res, _id);
+    })
 
 router.get('/recetasDeUser', Authorization, async function (req,res){
     const{creador} = req.headers;
@@ -47,6 +47,13 @@ router.post("/filtrarRecetas", async function(req,res){
     console.log(filtros)
     recetaController.filtrarReceta(req,res,filtros);
 })
+
+router.delete("/deleteReceta", async function(req,res){
+    const {_id} = req.body;
+    console.log("id:", _id);
+    recetaController.eliminarReceta(req, res, _id);
+})
+
 
 module.exports = router;
 

@@ -60,7 +60,7 @@ exports.eliminarUser = async function (req, res, key){
     try {
         // Calling the Service function with the new object from the Request Body
         var usuarioEliminado = await userService.deleteUser(key);
-        return res.status(201).json({usuarioEliminado, message: "Usuario eliminado"})
+        return res.status(201).json({status:201, message: "Usuario eliminado"})
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
