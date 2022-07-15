@@ -85,11 +85,8 @@ exports.filtroRecetas = async function(filtro){
     regexIngredientes = new RegExp(filtro.ingredientes,'i');
     regexCategoria = new RegExp(filtro.categoria,'i');
     regexDificultad= new RegExp(filtro.dificultad,'i');
-    const recetas = await Receta.find({$or: [{ingredientes: {$regex: regexIngredientes}},{dificultad: {$regex: regexDificultad}}, {categoria: {$regex: regexCategoria}} ]});
-    //const recetas = await Receta.find({$and: [{$or: [{dificultad: {$regex: regexDificultad}},{ingredientes: {$regex: regexIngredientes}}, {categoria: {$regex: regexCategoria}}]}, {borrador: false}]})
     
-    //const recetas = await Receta.find({$or: [{dificultad: {$regex: regexDificultad}},{ingredientes: {$regex: regexIngredientes}}, {categoria: {$regex: regexCategoria}}]})
-    
+    const recetas = await Receta.find({ingredientes: {$regex: regexIngredientes},categoria:{$regex: regexCategoria},dificultad:{$regex: regexDificultad}, borrador:false })
     console.log(recetas[0]);
     return recetas;
 }
