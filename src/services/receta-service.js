@@ -57,6 +57,7 @@ exports.deleteReceta = async function(key){
     console.log("Se elimino la receta");
 }
 
+
 exports.traerRecetasUser = async function(creador){
     const recetas = await Receta.find({creador: creador}).sort({updated: 'desc'}).lean();
     console.log(recetas);
