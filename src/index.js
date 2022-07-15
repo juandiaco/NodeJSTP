@@ -3,6 +3,8 @@ const app = express();
 // Se importa el modulo path para unir directorios en la aplicación
 const path = require('path');
 
+const bodyParser = require("body-parser");
+
 // Se cargan las variables de entorno
 require("dotenv").config();
 
@@ -105,11 +107,12 @@ app.use(function (req, res, next){
     next();
 });
 
-app.use(express.json());
+app.use(express.json({limit:'10MB'}));
 
-app.use(express.urlencoded({
-    extended: false
-  }));
+app.use(express.urlencoded({limit:'10MB'}));
+
+
+
 
 
 

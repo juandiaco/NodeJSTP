@@ -65,7 +65,7 @@ exports.traerRecetasUser = async function(creador){
 
 exports.traerRecetas = async function(){
     console.log("TRAER RECETAS SERVICE");
-    const recetas = await (await Receta.find({borrador: false}).sort({updated: 'desc'}).limit(15));
+    const recetas = await Receta.find({borrador: false}).sort({updated: 'desc'}).limit(15);
     console.log(recetas[0]);
     return recetas;
 }
