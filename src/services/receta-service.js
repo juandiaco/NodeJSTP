@@ -43,10 +43,10 @@ exports.crearReceta = async function(receta){
 //Edita la Receta
 exports.editeReceta = async function (recetaEditada){
     console.log ("Hola soy el Receta-Service");
-    const{titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento} = recetaEditada;
+    const{titulo, categoria, ingredientes, duracion, updated, dificultad, procedimiento, borrador} = recetaEditada;
     console.log(recetaEditada);
-    console.log({titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
-    await Receta.findByIdAndUpdate(recetaEditada._id,{titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
+    console.log({titulo, categoria, ingredientes, duracion, updated, dificultad, procedimiento, borrador});
+    await Receta.findByIdAndUpdate(recetaEditada._id,{titulo, categoria, ingredientes, duracion, updated, dificultad, procedimiento, borrador});
     console.log("Receta editada exitosamente")
 }
 

@@ -35,7 +35,7 @@ exports.crearReceta = async function(req, res, nuevaReceta){
 exports.editarReceta = async function (req, res, recetaTemporal){
     console.log("Welcome to receta controller");
     console.log(recetaTemporal.titulo);
-    const recetaEncontrada = await Receta.find({titulo: recetaTemporal.titulo});
+    const recetaEncontrada = await Receta.find({titulo: recetaTemporal._id});
 
     try {
         // Calling the Service function with the new object from the Request Body

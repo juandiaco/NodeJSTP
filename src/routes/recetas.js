@@ -17,8 +17,8 @@ router.post('/crearReceta/', async(req,res) =>{
 
 //Editar una Receta
 router.put('/editarReceta/',Authorization, async function (req,res){
-    const {_id, titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento} = req.body;
-    const nuevaRecetaEditada = new Receta ({_id, titulo, descripcion, categoria, ingredientes, duracion, updated, dificultad, procedimiento});
+    const {_id, titulo, categoria, ingredientes, duracion, updated, dificultad, procedimiento, borrador} = req.body;
+    const nuevaRecetaEditada = new Receta ({_id, titulo, categoria, ingredientes, duracion, updated, dificultad, procedimiento, borrador});
     console.log(nuevaRecetaEditada);
     recetaController.editarReceta(req,res,nuevaRecetaEditada);
 })
@@ -40,7 +40,7 @@ router.get('/traerRecetas', async function(req,res){
     recetaController.traerRecetas(req,res);
 })
 
-router.get('/traerRecetaCompleta' async function (req,res){
+router.get('/traerRecetaCompleta', async function (req,res){
     recetaController.traerRecetaCompleta(req,res);
 })
 
