@@ -1,7 +1,6 @@
 const recetaService = require("../services/receta-service.js");
 const Receta = require("../models/Receta");
 
-
 //Crear Receta
 exports.crearReceta = async function(req, res, nuevaReceta){
     console.log("welcome to crear receta");
@@ -14,7 +13,11 @@ exports.crearReceta = async function(req, res, nuevaReceta){
         procedimiento: nuevaReceta.procedimiento,
         borrador: nuevaReceta.borrador,
         creador: nuevaReceta.creador,
+        imagenReceta: nuevaReceta.imagenReceta,
     };
+    console.log(nuevaReceta.imagenReceta);
+
+
     console.log("Receta Controller",nuevaReceta);
     try {
         // Calling the Service function with the new object from the Request Body

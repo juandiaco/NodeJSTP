@@ -1,4 +1,6 @@
 const Receta = require('../models/Receta');
+const {cloudinary} = require ('../cloudinary/cloudinary');
+const dotenv = require('dotenv');
 
 //Crea la Receta
 exports.crearReceta = async function(receta){
@@ -11,6 +13,7 @@ exports.crearReceta = async function(receta){
         procedimiento: receta.procedimiento,
         borrador: receta.borrador,
         creador: receta.creador,
+        imagenReceta: receta.imagenReceta,
     });
 
     console.log("Receta servicio", nuevaReceta);
@@ -18,6 +21,15 @@ exports.crearReceta = async function(receta){
    
     
     try {
+        console.log("guardando imagen de la receta");
+        const uploadedResponse = await cloudinary.uploader.upload(nuevaReceta.imagenReceta,{upload_preset: 'TP'});
+
+        console.log(uploadedResponse);
+        const jsonRespuesta = await uploadedResponse.public_id;
+        console.log("JSON RESP",jsonRespuesta);
+
+        nuevaReceta.imagenReceta = uploadedResponse.public_id;
+
         console.log("creando receta");
         var recetaGuardada = await nuevaReceta.save();
         return {Receta:recetaGuardada}
