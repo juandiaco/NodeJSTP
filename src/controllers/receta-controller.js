@@ -1,5 +1,6 @@
 const recetaService = require("../services/receta-service.js");
 const Receta = require("../models/Receta");
+const jwt = require("jsonwebtoken");
 
 //Crear Receta
 exports.crearReceta = async function(req, res, nuevaReceta){
@@ -59,7 +60,7 @@ exports.eliminarReceta = async function (req,res,key){
     } catch (e) {
         //Return an Error Response Message with Code and the Error Message.
         console.log(e)
-        return res.status(400).json({status: 400, message: "El usuario no pudo ser eliminado"})
+        return res.status(400).json({status: 400, message: "No se pudo eliminar la receta"})
     };
 }
 

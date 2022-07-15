@@ -13,6 +13,4 @@ mongoose.connect(conexion,{
 .then(db => console.log('Se conectó a la DB'))
 .catch(err => console.error(err));
 
-//Models
 
-require('./models/Receta');
